@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | Canton Row</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="logo">CANTON ROW<span>.</span></a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="catalog.html">Shop</a>
+            <a href="brand.html">Brands</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="contact-hero">
+            <p class="eyebrow">WE'RE HERE TO HELP</p>
+            <h1>Let's talk about<br><span>what you need.</span></h1>
+            <p>
+                Questions about a product, order or availability?
+                Send us a message and we'll help you find the information you need.
+            </p>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+
+            <!-- Contact Details -->
+            <div class="contact-info">
+                <p class="eyebrow">GET IN TOUCH</p>
+                <h2>We'd love to hear from you.</h2>
+
+                <p class="info-description">
+                    Reach out with your questions, feedback or product enquiries.
+                    Use the contact form or one of the contact methods below.
+                </p>
+
+                <!-- WhatsApp -->
+                <a
+                    class="contact-card"
+                    href="https://wa.me/YOURWHATSAPPNUMBER"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <div class="contact-icon">W</div>
+                    <div>
+                        <h3>WhatsApp Support</h3>
+                        <p>Chat with us about your enquiry</p>
+                        <span>Start a conversation ↗</span>
+                    </div>
+                </a>
+
+                <!-- Email -->
+                <a
+                    class="contact-card"
+                    href="mailto:YOUR_EMAIL@example.com"
+                >
+                    <div class="contact-icon">@</div>
+                    <div>
+                        <h3>Email Us</h3>
+                        <p>For general and product enquiries</p>
+                        <span>Send an email ↗</span>
+                    </div>
+                </a>
+
+                <!-- Business Details -->
+                <div class="business-details">
+                    <h3>Business Information</h3>
+                    <p>
+                        <strong>Brand:</strong> Canton Row
+                    </p>
+                    <p>
+                        <strong>Business address:</strong>
+                        Add your official business address here.
+                    </p>
+                    <p>
+                        <strong>Phone:</strong>
+                        Add your official contact number.
+                    </p>
+                </div>
+
+                <div class="support-hours">
+                    <span class="status-dot"></span>
+                    <div>
+                        <h3>Support Hours</h3>
+                        <p>
+                            Please contact us through the available channels.
+                            Confirmed support hours will be published here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-box">
+                <p class="eyebrow">SEND A MESSAGE</p>
+                <h2>How can we help?</h2>
+
+                <form id="contactForm">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select an enquiry type</option>
+                            <option value="Product Enquiry">Product Enquiry</option>
+                            <option value="Order Status">Order Status</option>
+                            <option value="Size and Fit">Size and Fit</option>
+                            <option value="Availability">Product Availability</option>
+                            <option value="Shipping">Shipping and Delivery</option>
+                            <option value="Returns">Returns and Exchanges</option>
+                            <option value="Payment">Payment Query</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            placeholder="Tell us how we can help..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        SEND MESSAGE <span>↗</span>
+                    </button>
+
+                    <p class="form-note">
+                        Please don't include passwords or sensitive payment details.
+                    </p>
+
+                    <p id="formStatus" class="form-status" role="status"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section">
+            <div class="faq-heading">
+                <p class="eyebrow">QUICK ANSWERS</p>
+                <h2>Frequently asked questions.</h2>
+                <p>
+                    Some common questions about shopping with Canton Row.
+                </p>
+            </div>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>How can I check my order status?</summary>
+                    <p>
+                        Visit the Orders page if your website supports order
+                        tracking, or contact support with your order reference.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How do I choose the right size?</summary>
+                    <p>
+                        Check the size options displayed on the individual
+                        product page. If you need more information, contact
+                        us before placing your order.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How can I check product availability?</summary>
+                    <p>
+                        Open the product page and review its currently
+                        available options. Contact us if you need clarification.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What are the shipping and delivery timelines?</summary>
+                    <p>
+                        Delivery timelines can vary. Please check the
+                        confirmed shipping information provided by Canton Row
+                        before placing an order.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Which payment methods are accepted?</summary>
+                    <p>
+                        Please refer to the payment options shown during
+                        checkout. Only list payment methods that your website
+                        actually supports.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I return or exchange a product?</summary>
+                    <p>
+                        Return and exchange eligibility depends on the
+                        applicable store policy. Please review the official
+                        policy or contact support before ordering.
+                    </p>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- Bottom CTA -->
+        <section class="contact-cta">
+            <p class="eyebrow">STILL HAVE QUESTIONS?</p>
+            <h2>We're just a message away.</h2>
+            <a
+                href="https://wa.me/YOURWHATSAPPNUMBER"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="whatsapp-btn"
+            >
+                CHAT ON WHATSAPP ↗
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <a href="index.html" class="logo">CANTON ROW<span>.</span></a>
+        <p>Curated style. Everyday essentials.</p>
+
+        <div class="footer-links">
+            <a href="catalog.html">Shop</a>
+            <a href="brand.html">Brands</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <p class="copyright">
+            © 2026 Canton Row. All rights reserved.
+        </p>
+    </footer>
+
+    <script>
+        const contactForm = document.getElementById("contactForm");
+        const formStatus = document.getElementById("formStatus");
+
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            formStatus.textContent =
+                "The form is ready, but message delivery is not configured yet. Please contact us using the available contact details.";
+
+            formStatus.classList.add("visible");
+        });
+    </script>
+
+</body>
+</html>
+```

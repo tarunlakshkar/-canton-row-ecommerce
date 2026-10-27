@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catalog — Canton Row</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Announcement -->
+    <div class="announcement-bar">
+        Discover your next favourite.
+    </div>
+
+
+    <!-- Navbar -->
+    <header class="site-header">
+
+        <nav class="navbar container">
+
+            <a href="index.html" class="logo">
+                CANTON<span>.</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="catalog.html" class="active">Catalog</a>
+                </li>
+
+                <li>
+                    <a href="brand.html">Brands</a>
+                </li>
+
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+
+
+            </ul>
+
+            <a href="catalog.html" class="nav-cta">
+                Shop Now <span>↗</span>
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Catalog Hero -->
+    <section class="catalog-hero container">
+
+        <div>
+            <span class="eyebrow">THE CANTON ROW COLLECTION</span>
+
+            <h1>
+                Shop the<br>
+                <span>Collection.</span>
+            </h1>
+
+            <p>
+                Explore sneakers, bags, jerseys and everyday
+                essentials curated for your rotation.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- Catalog Section -->
+    <main class="catalog-section container">
+
+        <!-- Search + Sort -->
+        <div class="catalog-top">
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    id="searchInput"
+                >
+
+            </div>
+
+            <select id="sortFilter">
+
+                <option value="default">
+                    Sort By
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="catalog-layout">
+
+            <!-- Filters -->
+            <aside class="catalog-filters">
+
+                <div class="filter-heading">
+                    <h3>Filters</h3>
+                    <button type="button" id="clearFilters">
+                        Clear
+                    </button>
+                </div>
+
+
+                <!-- Category -->
+                <div class="filter-group">
+
+                    <h4>Category</h4>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="category"
+                            value="Sneakers"
+                        >
+                        Sneakers & Footwear
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="category"
+                            value="Luxury Sneakers"
+                        >
+                        Luxury Sneakers
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="category"
+                            value="Bags"
+                        >
+                        Bags & Handbags
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="category"
+                            value="Jerseys"
+                        >
+                        Jerseys & Apparel
+                    </label>
+
+                </div>
+
+
+                <!-- Brand -->
+                <div class="filter-group">
+
+                    <h4>Brand</h4>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="brand"
+                            value="Canton"
+                        >
+                        Canton Row
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="brand"
+                            value="Urban"
+                        >
+                        Urban Edit
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="brand"
+                            value="Street"
+                        >
+                        Street Club
+                    </label>
+
+                </div>
+
+
+                <!-- Price -->
+                <div class="filter-group">
+
+                    <h4>Price</h4>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="price"
+                            value="under2000"
+                        >
+                        Under ₹2,000
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="price"
+                            value="2000-5000"
+                        >
+                        ₹2,000 – ₹5,000
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="price"
+                            value="above5000"
+                        >
+                        Above ₹5,000
+                    </label>
+
+                </div>
+
+            </aside>
+
+
+            <!-- Products -->
+            <section class="catalog-products">
+
+                <div class="catalog-results">
+                    <span>
+                        Showing <strong>3</strong> products
+                    </span>
+                </div>
+
+
+                <div class="catalog-product-grid">
+
+
+                    <!-- PRODUCT 1 -->
+                    <article class="catalog-product-card">
+
+                        <div class="catalog-product-image">
+
+                            <span class="product-badge">
+                                TRENDING
+                            </span>
+
+                            <img
+                                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=85"
+                                alt="Canton Retro Runner"
+                            >
+
+                        </div>
+
+
+                        <div class="catalog-product-info">
+
+                            <div class="catalog-product-title">
+
+                                <div>
+                                    <h3>Retro Runner</h3>
+
+                                    <p>
+                                        Sneakers · Canton Row
+                                    </p>
+                                </div>
+
+                                <strong>
+                                    ₹3,499
+                                </strong>
+
+                            </div>
+
+
+                            <div class="variant-label">
+                                Sizes
+                            </div>
+
+                            <div class="size-list">
+
+                                <span>6</span>
+                                <span>7</span>
+                                <span>8</span>
+                                <span>9</span>
+                                <span>10</span>
+
+                            </div>
+
+
+                            <div class="catalog-buttons">
+
+                                <a
+                                    href="product.html?id=1"
+                                    class="product-details-btn"
+                                >
+                                    Product Details
+                                </a>
+
+                                <a
+                                    href="product.html?id=1"
+                                    class="order-btn"
+                                >
+                                    Order Now
+                                    <span>↗</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- PRODUCT 2 -->
+                    <article class="catalog-product-card">
+
+                        <div class="catalog-product-image">
+
+                            <span class="product-badge badge-light">
+                                NEW
+                            </span>
+
+                            <img
+                                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=85"
+                                alt="Canton Daily Carry Bag"
+                            >
+
+                        </div>
+
+
+                        <div class="catalog-product-info">
+
+                            <div class="catalog-product-title">
+
+                                <div>
+                                    <h3>Daily Carry Pack</h3>
+
+                                    <p>
+                                        Bags · Urban Edit
+                                    </p>
+                                </div>
+
+                                <strong>
+                                    ₹2,199
+                                </strong>
+
+                            </div>
+
+
+                            <div class="variant-label">
+                                Colour
+                            </div>
+
+                            <div class="size-list">
+
+                                <span>Black</span>
+                                <span>Beige</span>
+
+                            </div>
+
+
+                            <div class="catalog-buttons">
+
+                                <a
+                                    href="product.html?id=2"
+                                    class="product-details-btn"
+                                >
+                                    Product Details
+                                </a>
+
+                                <a
+                                    href="product.html?id=2"
+                                    class="order-btn"
+                                >
+                                    Order Now
+                                    <span>↗</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- PRODUCT 3 -->
+                    <article class="catalog-product-card">
+
+                        <div class="catalog-product-image">
+
+                            <span class="product-badge">
+                                MATCH DAY
+                            </span>
+
+                            <img
+                                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=85"
+                                alt="Canton Matchday Jersey"
+                            >
+
+                        </div>
+
+
+                        <div class="catalog-product-info">
+
+                            <div class="catalog-product-title">
+
+                                <div>
+                                    <h3>Matchday Classic</h3>
+
+                                    <p>
+                                        Jerseys · Street Club
+                                    </p>
+                                </div>
+
+                                <strong>
+                                    ₹1,499
+                                </strong>
+
+                            </div>
+
+
+                            <div class="variant-label">
+                                Sizes
+                            </div>
+
+                            <div class="size-list">
+
+                                <span>S</span>
+                                <span>M</span>
+                                <span>L</span>
+                                <span>XL</span>
+
+                            </div>
+
+
+                            <div class="catalog-buttons">
+
+                                <a
+                                    href="product.html?id=3"
+                                    class="product-details-btn"
+                                >
+                                    Product Details
+                                </a>
+
+                                <a
+                                    href="product.html?id=3"
+                                    class="order-btn"
+                                >
+                                    Order Now
+                                    <span>↗</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-main">
+
+                <div class="footer-brand">
+
+                    <a href="index.html" class="logo footer-logo">
+                        CANTON<span>.</span>
+                    </a>
+
+                    <p>
+                        Sneakers, bags & match-day essentials.
+                        Find the pieces that feel like you.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>EXPLORE</h4>
+
+                    <a href="index.html">Home</a>
+                    <a href="catalog.html">Catalog</a>
+                    <a href="brand.html">Brands</a>
+                    <a href="about.html">About</a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>HELP</h4>
+
+                    <a href="contact.html">Contact</a>
+                    <a href="orders.html">Orders</a>
+                    <a href="#">Shipping Policy</a>
+                    <a href="#">Returns & Refunds</a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>FOLLOW</h4>
+
+                    <a href="#">Instagram ↗</a>
+                    <a href="#">Facebook ↗</a>
+                    <a href="#">Pinterest ↗</a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 Canton Row. All rights reserved.
+                </p>
+
+                <p>
+                    BUILT AROUND YOUR EVERYDAY.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+<script src="js/products.js"></script>
+<script src="js/catalog.js"></script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+// =====================================================
+// CANTON ROW - CATALOG FUNCTIONALITY
+// Works with the existing catalog.html
+// =====================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // -------------------------------------------------
+    // 1. GET HTML ELEMENTS
+    // -------------------------------------------------
+
+    const searchInput = document.querySelector("#searchInput");
+    const sortFilter = document.querySelector("#sortFilter");
+    const clearButton = document.querySelector("#clearFilters");
+
+    const productGrid = document.querySelector(".catalog-product-grid");
+    const resultsText = document.querySelector(".catalog-results strong");
+
+    const categoryCheckboxes = document.querySelectorAll(
+        'input[name="category"]'
+    );
+
+    const brandCheckboxes = document.querySelectorAll(
+        'input[name="brand"]'
+    );
+
+    const priceRadios = document.querySelectorAll(
+        'input[name="price"]'
+    );
+
+    if (!productGrid) {
+        console.error("Catalog product grid not found.");
+        return;
+    }
+
+
+    // -------------------------------------------------
+    // 2. GET EXISTING PRODUCT CARDS
+    // -------------------------------------------------
+
+    const allCards = Array.from(
+        productGrid.querySelectorAll(".catalog-product-card")
+    );
+
+
+    // Read product information from each HTML card
+    const products = allCards.map(card => {
+
+        const name = card.querySelector("h3")?.textContent.trim() || "";
+
+        const detailText =
+            card.querySelector(".catalog-product-title p")?.textContent.trim() || "";
+
+        const details = detailText.split("·");
+
+        const category = details[0]?.trim() || "";
+
+        const brand = details[1]?.trim() || "";
+
+        const priceText =
+            card.querySelector(".catalog-product-title strong")?.textContent || "0";
+
+        const price = Number(
+            priceText.replace(/[^\d.]/g, "")
+        );
+
+        return {
+            card,
+            name,
+            category,
+            brand,
+            price,
+            searchText: card.textContent.toLowerCase()
+        };
+    });
+
+
+    // -------------------------------------------------
+    // 3. READ FILTERS FROM URL
+    // Example: catalog.html?brand=Urban
+    // Example: catalog.html?category=Bags
+    // -------------------------------------------------
+
+    const params = new URLSearchParams(window.location.search);
+
+    const urlBrand = params.get("brand");
+    const urlCategory = params.get("category");
+
+    // Preselect category if the option exists
+    if (urlCategory) {
+        categoryCheckboxes.forEach(checkbox => {
+            if (
+                checkbox.value.toLowerCase() ===
+                urlCategory.toLowerCase()
+            ) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+    // Preselect brand if the option exists
+    if (urlBrand) {
+        brandCheckboxes.forEach(checkbox => {
+            if (
+                urlBrand.toLowerCase().includes(checkbox.value.toLowerCase()) ||
+                checkbox.value.toLowerCase().includes(urlBrand.toLowerCase())
+            ) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+
+    // -------------------------------------------------
+    // 4. FILTER PRODUCTS
+    // -------------------------------------------------
+
+    function filterProducts() {
+
+        const searchValue = searchInput
+            ? searchInput.value.trim().toLowerCase()
+            : "";
+
+        const selectedCategories = Array.from(categoryCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value.toLowerCase());
+
+        const selectedBrands = Array.from(brandCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value.toLowerCase());
+
+        const selectedPrice = document.querySelector(
+            'input[name="price"]:checked'
+        )?.value || "all";
+
+
+        let filteredProducts = products.filter(product => {
+
+            // Search by name, category, brand or other card text
+            const matchesSearch =
+                product.searchText.includes(searchValue);
+
+
+            // Multiple selected categories: any matching category
+            const matchesCategory =
+                selectedCategories.length === 0 ||
+                selectedCategories.some(category =>
+                    product.category.toLowerCase().includes(category)
+                );
+
+
+            // Brand values such as "Canton" match "Canton Row"
+            const matchesBrand =
+                selectedBrands.length === 0 ||
+                selectedBrands.some(brand =>
+                    product.brand.toLowerCase().includes(brand)
+                );
+
+
+            // Price filter
+            let matchesPrice = true;
+
+            if (selectedPrice === "under2000") {
+                matchesPrice = product.price < 2000;
+            } else if (selectedPrice === "2000-5000") {
+                matchesPrice =
+                    product.price >= 2000 && product.price <= 5000;
+            } else if (selectedPrice === "above5000") {
+                matchesPrice = product.price > 5000;
+            }
+
+
+            // Optional brand filter passed from the Brands page
+            const matchesURLBrand =
+                !urlBrand ||
+                product.brand.toLowerCase().includes(urlBrand.toLowerCase());
+
+            // Optional category filter passed from the Brands page
+            const matchesURLCategory =
+                !urlCategory ||
+                product.category.toLowerCase() ===
+                    urlCategory.toLowerCase();
+
+
+            return (
+                matchesSearch &&
+                matchesCategory &&
+                matchesBrand &&
+                matchesPrice &&
+                matchesURLBrand &&
+                matchesURLCategory
+            );
+        });
+
+
+        // -------------------------------------------------
+        // 5. SORT PRODUCTS BY PRICE
+        // HTML values are "low" and "high"
+        // -------------------------------------------------
+
+        const sortValue = sortFilter?.value || "default";
+
+        if (sortValue === "low") {
+            filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (sortValue === "high") {
+            filteredProducts.sort((a, b) => b.price - a.price);
+        }
+
+
+        // -------------------------------------------------
+        // 6. DISPLAY FILTERED AND SORTED CARDS
+        // -------------------------------------------------
+
+        // Hide every card first
+        allCards.forEach(card => {
+            card.style.display = "none";
+        });
+
+        // Show matching cards in the sorted order
+        filteredProducts.forEach(product => {
+            productGrid.appendChild(product.card);
+            product.card.style.display = "";
+        });
+
+
+        // Update result count
+        if (resultsText) {
+            resultsText.textContent = filteredProducts.length;
+        }
+
+
+        // Show a message if no products match
+        let noResults = document.querySelector("#noCatalogResults");
+
+        if (filteredProducts.length === 0) {
+
+            if (!noResults) {
+                noResults = document.createElement("p");
+                noResults.id = "noCatalogResults";
+                noResults.className = "no-products";
+                noResults.textContent =
+                    "No products found. Try changing your filters.";
+
+                productGrid.appendChild(noResults);
+            }
+
+            noResults.style.display = "block";
+
+        } else if (noResults) {
+
+            noResults.style.display = "none";
+        }
+    }
+
+
+    // -------------------------------------------------
+    // 7. SEARCH EVENT
+    // -------------------------------------------------
+
+    if (searchInput) {
+        searchInput.addEventListener("input", filterProducts);
+    }
+
+
+    // -------------------------------------------------
+    // 8. CATEGORY FILTER EVENTS
+    // -------------------------------------------------
+
+    categoryCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", filterProducts);
+    });
+
+
+    // -------------------------------------------------
+    // 9. BRAND FILTER EVENTS
+    // -------------------------------------------------
+
+    brandCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", filterProducts);
+    });
+
+
+    // -------------------------------------------------
+    // 10. PRICE FILTER EVENTS
+    // -------------------------------------------------
+
+    priceRadios.forEach(radio => {
+        radio.addEventListener("change", filterProducts);
+    });
+
+
+    // -------------------------------------------------
+    // 11. SORT EVENT
+    // -------------------------------------------------
+
+    if (sortFilter) {
+        sortFilter.addEventListener("change", filterProducts);
+    }
+
+
+    // -------------------------------------------------
+    // 12. CLEAR ALL FILTERS
+    // -------------------------------------------------
+
+    if (clearButton) {
+        clearButton.addEventListener("click", () => {
+
+            // Clear search
+            if (searchInput) {
+                searchInput.value = "";
+            }
+
+            // Uncheck categories
+            categoryCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Uncheck brands
+            brandCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Clear price filter
+            priceRadios.forEach(radio => {
+                radio.checked = false;
+            });
+
+            // Reset sorting
+            if (sortFilter) {
+                sortFilter.value = "default";
+            }
+
+            // Remove URL filters too
+            window.history.replaceState(
+                {},
+                "",
+                window.location.pathname
+            );
+
+            // Clear URL filter values for this page session
+            // and display all products
+            window.location.reload();
+        });
+    }
+
+
+    // -------------------------------------------------
+    // 13. ORDER NOW LINKS
+    // Keep the existing product IDs and add order=true
+    // -------------------------------------------------
+
+    document.querySelectorAll(".catalog-product-card .order-btn")
+        .forEach(link => {
+
+            const href = link.getAttribute("href");
+
+            if (!href) return;
+
+            const targetURL = new URL(href, window.location.href);
+
+            targetURL.searchParams.set("order", "true");
+
+            link.href =
+                targetURL.pathname.split("/").pop() +
+                targetURL.search;
+        });
+
+
+    // -------------------------------------------------
+    // 14. INITIAL DISPLAY
+    // -------------------------------------------------
+
+    filterProducts();
+
+});
+
+
+
+=============================================================CUSTOMER DETAILS FORM===================================================================
+<!-- Customer Details Form -->
+<div class="detail-section" id="customerForm">
+    <h3>Delivery Details</h3>
+
+    <label for="customerName">Full Name</label>
+    <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your full name"
+        required
+    >
+
+    <label for="customerPhone">Phone Number</label>
+    <input
+        type="tel"
+        id="customerPhone"
+        placeholder="Enter your phone number"
+        required
+    >
+
+    <label for="customerAddress">Delivery Address</label>
+    <textarea
+        id="customerAddress"
+        placeholder="House number, street, city, PIN code"
+        required
+    ></textarea>
+</div>
+
+==================================================================Order button====================================================================================
+
+orderBtn.addEventListener("click", () => {
+    if (!currentProduct) {
+        alert("Product details abhi load nahi hui hain.");
+        return;
+    }
+
+    if (currentProduct.sizes?.length && !selectedSize) {
+        alert("Please apna size select karein.");
+        return;
+    }
+
+    if (currentProduct.colors?.length && !selectedColor) {
+        alert("Please apna colour select karein.");
+        return;
+    }
+
+    const orderDetails = {
+        productId: currentProduct._id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        quantity: quantity,
+        size: selectedSize || null,
+        color: selectedColor || null
+    };
+
+    // Filhaal order details test karne ke liye
+    console.log("Selected order:", orderDetails);
+    alert("Product select ho gaya! Order system hum next step mein banayenge.");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
